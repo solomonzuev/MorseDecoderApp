@@ -53,7 +53,7 @@ public class BitDecoder
 
         if (timeUnit < 1)
         {
-            throw new ArgumentException($"Failed to get a unit of time for {_bits}");
+            throw new Exception($"Failed to get a unit of time for {_bits}");
         }
 
         return timeUnit;
