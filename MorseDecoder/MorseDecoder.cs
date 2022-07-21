@@ -2,52 +2,6 @@
 
 public class MorseDecoder
 {
-    private static Dictionary<char, string> symbolToMorse = new()
-    {
-        ['A'] = ".-",
-        ['B'] = "-...",
-        ['C'] = "-.-.",
-        ['D'] = "-..",
-        ['E'] = ".",
-        ['F'] = "..-.",
-        ['G'] = "--.",
-        ['H'] = "....",
-        ['I'] = "..",
-        ['J'] = ".---",
-        ['K'] = "-.-",
-        ['L'] = ".-..",
-        ['M'] = "--",
-        ['N'] = "-.",
-        ['O'] = "---",
-        ['P'] = ".--.",
-        ['Q'] = "--.-",
-        ['R'] = ".-.",
-        ['S'] = "...",
-        ['T'] = "-",
-        ['U'] = "..-",
-        ['V'] = "...-",
-        ['W'] = ".--",
-        ['X'] = "-..-",
-        ['Y'] = "-.--",
-        ['Z'] = "--..",
-        ['1'] = ".----",
-        ['2'] = "..---",
-        ['3'] = "...--",
-        ['4'] = "....-",
-        ['5'] = ".....",
-        ['6'] = "-....",
-        ['7'] = "--...",
-        ['8'] = "---..",
-        ['9'] = "----.",
-        ['0'] = "-----",
-        ['.'] = ".-.-.-",
-        [','] = "--..--",
-        ['!'] = "-.-.--",
-        ['?'] = "..--..",
-        [' '] = " ",
-        [' '] = " ",
-    };
-
     private static Dictionary<string, string> morseToSymbol = new()
     {
          [".-"] = "A",
@@ -94,19 +48,6 @@ public class MorseDecoder
          ["...---..."] = "SOS"
     };
 
-    private static Dictionary<int, string> zerosToSpaces = new()
-    {
-        [1] = "",
-        [3] = " ",
-        [7] = "   ",
-    };
-
-    private static Dictionary<int, string> onesToMorseCode = new()
-    {
-        [1] = ".", 
-        [3] = "-"
-    };
-
     public static string DecodeBits(string bits)
     {
         BitDecoder decoder = new(bits);
@@ -139,14 +80,4 @@ public class MorseDecoder
     {
         return morseToSymbol[code];
     }
-
-    public static string Encode(string text)
-    {
-        text = text.ToUpper();
-
-        return string.Join(' ', EverySymbolToMorseCode(text));
-    }
-
-    private static IEnumerable<string> EverySymbolToMorseCode(string text) 
-        => text.Select(s => symbolToMorse[s]);
 }

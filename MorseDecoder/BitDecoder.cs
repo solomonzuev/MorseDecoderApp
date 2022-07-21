@@ -61,7 +61,7 @@ public class BitDecoder
 
     public string DecodeToMorse()
     {
-        _currentBit = _bits[0];
+        ResetFields();
 
         foreach (var bit in _bits)
         {
@@ -77,6 +77,13 @@ public class BitDecoder
         }
 
         return _morseCode;
+    }
+
+    private void ResetFields()
+    {
+        _morseCode = string.Empty;
+        _currentBit = _bits[0];
+        _numberOfBits = 0;
     }
 
     private void ConvertCurrentNumberOfBitsToMorse()
