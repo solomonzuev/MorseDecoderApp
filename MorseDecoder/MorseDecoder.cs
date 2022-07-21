@@ -94,79 +94,24 @@ public class MorseDecoder
          ["...---..."] = "SOS"
     };
 
+    private static Dictionary<int, string> zerosToSpaces = new()
+    {
+        [1] = "",
+        [3] = " ",
+        [7] = "   ",
+    };
+
+    private static Dictionary<int, string> onesToMorseCode = new()
+    {
+        [1] = ".", 
+        [3] = "-"
+    };
+
     public static string DecodeBits(string bits)
     {
-        bits = bits.Trim('0');
-        bits += '0';
+        BitDecoder decoder = new(bits);
 
-        string morseCode = string.Empty;
-
-        int timeUnit = 2;
-        char currentUnit = '0';
-        int unitNumber = 0;
-        int zeros = 0;
-        int ones = 0;
-
-        foreach (var bit in bits)
-        {
-            if (bit == currentUnit)
-            {
-                unitNumber++;
-            }
-            else
-            {
-                if (unitNumber / timeUnit == 1)
-                {
-                    if (currentUnit == '0')
-                    {
-
-                    }
-                }
-            }
-        }
-
-        foreach (var bit in bits)
-        {
-            if (bit == '0')
-            {
-                if (ones > 0)
-                {
-                    switch (ones / timeUnit)
-                    {
-                        case 1:
-                            morseCode += '.';
-                            break;
-                        case 3:
-                            morseCode += '-';
-                            break;
-                    }
-
-                    ones = 0;
-                }
-                
-                zeros++;
-            }
-            else if (bit == '1')
-            {
-                if (zeros > 0)
-                {
-                    switch (zeros / timeUnit)
-                    {
-                        case 3:
-                            morseCode += ' ';
-                            break;
-                        case 7:
-                            morseCode += "   ";
-                            break;
-                    }
-
-                    zeros = 0;
-                }
-                
-                ones++;
-            }
-        }
-        return morseCode;
+        return decoder.DecodeToMorse();
     }
 
     public static string DecodeMorse(string morseCode)
