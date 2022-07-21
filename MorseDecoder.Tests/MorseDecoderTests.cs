@@ -1,6 +1,3 @@
-using MorseDecoder;
-using System.Diagnostics;
-
 namespace MorseDecoder.Tests
 {
     public class MorseDecoderTests
